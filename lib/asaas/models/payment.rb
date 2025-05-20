@@ -6,7 +6,7 @@ module Asaas
     attribute :id, Types::Coercible::String.optional.default(nil)
     attribute :customer, Types::Coercible::String
     attribute :billingType, BillingTypes.optional.default(nil)
-    attribute :value, Types::Coercible::Decimal.optional.default(nil)
+    attribute :value, Types::Coercible::BigDecimal.optional.default(nil)
     attribute :dueDate, Types::Coercible::String.optional.default(nil)
     attribute :description, Types::Coercible::String.optional.default(nil)
     attribute :externalReference, Types::Coercible::String.optional.default(nil)
@@ -32,5 +32,25 @@ module Asaas
 
     attribute :creditDate, Types::Coercible::String.optional.default(nil)
     attribute :estimatedCreditDate, Types::Coercible::String.optional.default(nil)
+
+    # Transparent checkout
+    attribute :creditCardHolderName, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardNumber, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardExpiryMonth, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardExpiryYear, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardCcv, Types::Coercible::String.optional.default(nil)
+    # Credit card holder information
+    attribute :creditCardHolderFullName, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardHolderEmail, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardHolderCpfCnpj, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardHolderAddress, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardHolderAddressNumber, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardHolderAddressComplement, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardHolderProvince, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardHolderCity, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardHolderUf, Types::Coercible::String.optional.default(nil)
+    attribute :creditCardHolderPostalCode, Types::Coercible::String.optional.default(nil)
+
+    attribute :remoteIp, Types::Coercible::String.optional.default(nil)
   end
 end

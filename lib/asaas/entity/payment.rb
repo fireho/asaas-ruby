@@ -42,7 +42,7 @@ module Asaas
       attribute :creditCardHolderPhoneDDD, String
       attribute :creditCardHolderMobilePhone, String
       attribute :creditCardHolderMobilePhoneDDD, String
-
+      attribute :remoteIp, String
     end
   end
 end
