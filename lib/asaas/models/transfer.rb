@@ -6,9 +6,9 @@ module Asaas
 
     attribute :id, Types::Coercible::String.optional.default(nil)
     attribute :dateCreated, Types::Coercible::String.optional.default(nil)
-    attribute :value, Types::Coercible::Decimal.optional.default(nil)
-    attribute :netValue, Types::Coercible::Decimal.optional.default(nil)
-    attribute :transferFee, Types::Coercible::Decimal.optional.default(nil)
+    attribute :value, Types::SafeCoercibleDecimal.optional.default(nil)
+    attribute :netValue, Types::SafeCoercibleDecimal.optional.default(nil)
+    attribute :transferFee, Types::SafeCoercibleDecimal.optional.default(nil)
     attribute :status, Status.optional.default(nil)
     attribute :effectiveDate, Types::Coercible::String.optional.default(nil)
     attribute :scheduleDate, Types::Coercible::String.optional.default(nil)

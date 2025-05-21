@@ -55,9 +55,9 @@ asaas_client.customers.create(customer)
 charge = Asaas::Payment.new({
   customer: customer.id,
   dueDate: '2019-10-10',
-  billingType: 'BOLETO',
-  description: "Teste de boleto",
-  value: BigDecimal("103.54").to_f,
+  billingType: 'BOLETO', # PIX CREDIT_CARD ....
+  description: "Teste pagamento",
+  value: (Float Integer BigDecimal String).to_s,  # 100.00
   postalService: false
 })
 
@@ -71,7 +71,6 @@ asaas_client.payments.create(charge)
       billingType: "PIX",
       customer: customer.id,                 # "cus_000005219617",
       value: value,                          #  Money.to_s 100.00
-      dueDate: asaas_date(1.days.from_now),  # "2023-07-21"
       description: description
     })
     payment = asaas.payments.create(new_payment)
@@ -117,16 +116,16 @@ Note: asaas uses CCV (others: CVV/CVC)
 
 ```ruby
     charge = Asaas::Payment.new({
-      customer: customer.id,       # "cus_000005219613",
+      customer: customer.id,                     # "cus_000005219613",
       billingType: 'CREDIT_CARD',
-      value: value.to_i,           #  Money.to_s 100.00
-      dueDate: 30.days.from_now.strftime("%Y-%m-%d"),  # "2023-07-21"
+      value: lots_money,                         #  Money.to_s 100.00
+      dueDate: "%Y-%m-%d",                       # "2023-07-21"
       # creditCard:
-      creditCardHolderName: card.name,     #  jose da silva sauro
-      creditCardNumber: card.number,       # "5162306219378829"
-      creditCardExpiryMonth: card.month,   # "05"
-      creditCardExpiryYear: card.year,     # "2024"
-      creditCardCcv: card.cvv,             # "318" NOTE: asaas call CCV, we call CVV
+      creditCardHolderName: card.name,           #  jose da silva sauro
+      creditCardNumber: card.number,             # "5162306219378829"
+      creditCardExpiryMonth: card.month,         # "05"
+      creditCardExpiryYear: card.year,           # "2024"
+      creditCardCcv: card.cvv,                   # "318" NOTE: asaas call CCV, we call CVV
       # creditCardHolder:
       creditCardHolderFullName: card.holder,     # "Marcelo Henrique Almeida"
       creditCardHolderEmail: card.email,         # "marcelo.almeida@gmail.com"
@@ -134,11 +133,11 @@ Note: asaas uses CCV (others: CVV/CVC)
       creditCardHolderAddressNumber: card.addr,  # "277"
       creditCardHolderPostalCode: card.zip,      # "89223-005"
       creditCardHolderAddressNumber: card.addr,  # "277"
-      creditCardHolderAddressComplement: "",    # card.compl,
+      creditCardHolderAddressComplement: "",     # card.compl,
       creditCardHolderMobilePhone: card.phone,   # "47 99999-9999"
       creditCardHolderPhone: ""
       # },
-      # remoteIp: card.ip            # user.last_ip
+      remoteIp: card.ip                          # user.last_ip
     })
 
     @asaas.payments.create(charge)

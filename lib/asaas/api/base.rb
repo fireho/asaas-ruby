@@ -151,7 +151,13 @@ module Asaas
       def body_parser(body)
         return nil unless body
 
-        body.to_h.delete_if { |k, v| v.nil? || v.to_s.empty? }.to_json
+        # Convert BigDecimal values to Float to ensure standard decimal in JSON,
+        parsed_body = body.to_h.transform_values do |v|
+          v.is_a?(BigDecimal) ? v.to_f : v
+        end
+
+        # then remove nil or empty string values.
+        parsed_body.delete_if { |k, v| v.nil? || v.to_s.empty? }.to_json
       end
 
       def request_headers

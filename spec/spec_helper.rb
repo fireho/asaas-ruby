@@ -16,6 +16,11 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+# Add the project's lib directory to the load path to ensure 'asaas-ruby' can be required directly.
+$LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
+require 'asaas-ruby'
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
