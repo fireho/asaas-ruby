@@ -64,7 +64,56 @@ charge = Asaas::Payment.new({
 asaas_client.payments.create(charge)
 ```
 
+### Pix dinâmico qr & code
+
+```ruby
+    new_payment = Asaas::Payment.new({
+      billingType: "PIX",
+      customer: customer.id,                 # "cus_000005219617",
+      value: value,                          #  Money.to_s 100.00
+      dueDate: asaas_date(1.days.from_now),  # "2023-07-21"
+      description: description
+    })
+    payment = asaas.payments.create(new_payment)
+
+    # Check if payment creation was successful and it's a PIX payment
+    # (payment will be an Asaas::Payment model or Asaas::Entity::Payment depending on API version and success)
+    if payment && !payment.is_a?(Asaas::Entity::Error) && payment.id # && payment.billingType == "PIX"
+      puts "Payment created successfully with ID: #{payment.id}"
+
+      # Fetch the PIX QR Code
+      qr_code_data = asaas.payments.pix_qr_code(payment.id)
+
+      if qr_code_data.is_a?(Asaas::Entity::PaymentPix)
+        puts "PIX QR Code details fetched successfully:"
+        puts "  Encoded Image: #{qr_code_data.encodedImage ? qr_code_data.encodedImage[0..30] + '...' : 'N/A'}" # Truncated for brevity
+        puts "  Payload: #{qr_code_data.payload}"
+        puts "  Expiration Date: #{qr_code_data.expirationDate}"
+      elsif qr_code_data.is_a?(Asaas::Entity::Error)
+        puts "Error fetching PIX QR Code:"
+        qr_code_data.errors.each do |error|
+          puts "  Code: #{error.code}, Description: #{error.description}"
+        end
+      else
+        puts "Unexpected response when fetching PIX QR Code."
+      end
+    else
+      puts "Failed to create PIX payment or payment ID is missing."
+      if payment.is_a?(Asaas::Entity::Error)
+        payment.errors.each do |error|
+          puts "  Error Code: #{error.code}, Description: #{error.description}"
+        end
+      end
+    end
+```
+
+### Pix estático
+
+TODO
+
 ### Transparent Checkout
+
+Note: asaas uses CCV (others: CVV/CVC)
 
 ```ruby
     charge = Asaas::Payment.new({
@@ -94,5 +143,4 @@ asaas_client.payments.create(charge)
 
     @asaas.payments.create(charge)
 
-# Note: asaas uses CCV (others: CVV/CVC)
 ```
