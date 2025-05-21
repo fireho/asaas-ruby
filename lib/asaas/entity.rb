@@ -11,6 +11,7 @@ module Asaas
     autoload :Meta, 'asaas/entity/meta'
     autoload :Notification, 'asaas/entity/notification'
     autoload :Payment, 'asaas/entity/payment'
+    autoload :PaymentPix, 'asaas/entity/payment_pix'
     autoload :Subscription, 'asaas/entity/subscription'
   end
 end

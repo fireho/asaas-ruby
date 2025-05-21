@@ -6,6 +6,7 @@ module Asaas
     autoload :Customer, 'asaas/api/customer'
     autoload :Notification, 'asaas/api/notification'
     autoload :Payment, 'asaas/api/payment'
+    autoload :PaymentPix, 'asaas/api/payment_pix'
     autoload :Subscription, 'asaas/api/subscription'
     autoload :Webhook, 'asaas/api/webhook'
     autoload :Transfer, 'asaas/api/transfer'

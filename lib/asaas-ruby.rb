@@ -21,6 +21,7 @@ module Asaas
   autoload :Customer, 'asaas/models/customer'
   autoload :Notification, 'asaas/models/notification'
   autoload :Payment, 'asaas/models/payment'
+  autoload :PaymentPix, 'asaas/models/payment_pix'
   autoload :Discount, 'asaas/models/discount'
   autoload :Interest, 'asaas/models/interest'
   autoload :Fine, 'asaas/models/fine'
